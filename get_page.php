@@ -1,5 +1,6 @@
 <?php 
- 
+//header("Content-Type: text/html;charset=utf-8");
+        header("Access-Control-Allow-Origin: *"); 
  	header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
  	
 	/**
@@ -25,8 +26,9 @@
 		foreach($pagina->fields as $field) {
 			if (!in_array($field->type, $avoid)) {
 				// si el campo no esta vacio
+
 				if( htmlentities($pagina->get($field->name)) )
-					$array[$field->name] = htmlentities($pagina->get($field->name));
+					$array[$field->name] = htmlspecialchars($pagina->get($field->name));
 			}
 		}
 		echo json_encode($array);
